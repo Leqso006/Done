@@ -1,0 +1,422 @@
+/*====================================================================
+  assets/css/news.css – FULL UNIFIED VERSION (November 17, 2025)
+  → Works perfectly alone on news.html (no styles.css required)
+====================================================================*/
+
+:root {
+  --primary: #f58217;
+  --text: #1a1a1a;
+  --bg: #fafafa;
+  --card: #ffffff;
+  --radius: 1.4rem;
+  --transition: 0.4s ease;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --card: #111;
+  --text: #e0e0e0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; overflow-x: hidden; }
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: var(--bg); 
+  color: var(--text); 
+  line-height: 1.7; 
+}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* ============================================================
+   HEADER + BACK BUTTON + LOGO (IDENTICAL TO SERVICE & PERSON PAGES)
+   ============================================================ */
+.header {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  height: 70px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+.nav { display: flex; justify-content: space-between; align-items: center; width: 100%; height: 100%; }
+
+.nav__logo .logo-img,
+#nav-logo {
+  height: 170px !important;
+  margin-bottom: -7px;
+  width: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.nav__logo:hover .logo-img { transform: scale(1.05); }
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--card);
+  color: var(--text);
+  border: 2px solid rgba(0,0,0,0.15);
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.94rem;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  backdrop-filter: blur(8px);
+  height: 40px;
+  transition: all 0.4s ease;
+}
+.back-btn i { font-size: 1.1rem; color: var(--primary); }
+.back-btn:hover {
+  border-color: var(--primary);
+  background: rgba(245,130,23,0.1);
+}
+.dark .back-btn {
+  background: rgba(17,17,17,0.8);
+  color: #e0e0e0;
+  border-color: rgba(255,255,255,0.2);
+}
+.dark .back-btn:hover { background: rgba(245,130,23,0.15); }
+
+@media (max-width: 768px) {
+  .header { height: 64px; }
+  .nav__logo .logo-img, #nav-logo { height: 150px !important; }
+  .back-btn { height: 36px; font-size: 0.9rem; padding: 0.5rem 1rem; }
+}
+.dark .header { background: #111; }
+
+/* ============================================================
+   BUTTONS (btn-primary + pulse-hover)
+   ============================================================ */
+.btn-primary {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: linear-gradient(135deg,#f58217,#e07a15);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  box-shadow: 0 8px 25px rgba(245,130,23,.3);
+  text-decoration: none;
+  transition: all .4s;
+}
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(245,130,23,.4);
+}
+.pulse-hover:hover { animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(245,130,23,.7); } 70% { box-shadow: 0 0 0 12px rgba(245,130,23,0); } 100% { box-shadow: 0 0 0 0 rgba(245,130,23,0); } }
+
+/* ============================================================
+   GLOW HOVER EFFECT
+   ============================================================ */
+.glow-hover {
+  transition: all .4s ease;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+.glow-hover:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(245,130,23,.25);
+  border-color: var(--primary);
+}
+.glow-hover::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle, rgba(245,130,23,.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .4s;
+}
+.glow-hover:hover::before { opacity: 1; }
+
+/* ============================================================
+   PAGE HERO – ORANGE + BLACK TEXT
+   ============================================================ */
+.page-hero {
+  height: 60vh;
+  min-height: 500px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 70px;
+}
+.page-hero .hero-overlay {  
+  position: absolute;
+  inset: 0;
+  background: url('../assets/img/earth-night.jpg') center/cover no-repeat;
+  opacity: 0.3;
+  z-index: 1;
+}
+.page-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 2rem;
+  color: #000;
+}
+.page-hero .hero-title { font-size: 3.8rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: 1px; }
+.page-hero .hero-subtitle { font-size: 1.4rem; opacity: 0.9; }
+@media (max-width: 768px) {
+  .page-hero { height: 50vh; min-height: 400px; }
+  .page-hero .hero-title { font-size: 2.8rem; }
+}
+
+/* ============================================================
+   FULL ARTICLES SECTION
+   ============================================================ */
+.news-full { padding: 6rem 0; background: #0a0a0a; color: #eee; }
+.news-article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s ease-out, transform .8s ease-out;
+}
+.news-article.visible { opacity: 1; transform: translateY(0); }
+
+.news-img-wrapper {
+  height: 320px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: 0 12px 35px rgba(0,0,0,.4);
+}
+.news-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+.news-article:hover .news-img-wrapper img { transform: scale(1.08); }
+
+.news-content-full {
+  background: #111;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  border-left: 4px solid var(--primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+.news-date { display: block; font-size: .95rem; color: var(--primary); font-weight: 600; margin-bottom: .8rem; }
+.news-content-full h2 { font-size: 2.2rem; margin: 0 0 1rem; color: #fff; line-height: 1.3; }
+.news-excerpt { font-size: 1.1rem; color: #ccc; margin-bottom: 1.8rem; line-height: 1.6; font-style: italic; }
+.news-body { font-size: 1.05rem; line-height: 1.8; color: #ddd; }
+.news-body p { margin-bottom: 1.2rem; }
+.news-body h3 { font-size: 1.5rem; color: var(--primary); margin: 1.8rem 0 1rem; }
+.news-body ul { list-style: none; padding-left: 0; margin: 1.2rem 0; }
+.news-body ul li {
+  position: relative;
+  padding-left: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: #ddd;
+}
+.news-body ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.news-body blockquote {
+  background: #1a1a1a;
+  border-left: 4px solid var(--primary);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #ccc;
+  border-radius: 0 1rem 1rem 0;
+}
+.news-body blockquote em { display: block; margin-top: .8rem; color: var(--primary); font-weight: 600; }
+
+.compliance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: #1a1a1a;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,.2);
+}
+.compliance-table th, .compliance-table td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.compliance-table th { background: var(--primary); color: #fff; font-weight: 600; }
+.compliance-table td { background: #222; color: #ddd; }
+.compliance-table tr:last-child td { border-bottom: none; }
+
+.article-divider {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,.1);
+  margin: 4rem 0;
+}
+
+/* ============================================================
+   CTA SECTION
+   ============================================================ */
+.cta {
+  padding: 6rem 0;
+  background: var(--card);
+  text-align: center;
+}
+.cta h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.cta p { max-width: 600px; margin: 0 auto 2rem; color: #666; }
+.dark .cta { background: #0a0a0a; }
+.dark .cta p { color: #ccc; }
+
+/* FOOTER */
+.footer {
+  padding: 3rem 1.5rem 2rem !important;
+  text-align: center;
+  background: var(--bg);
+  margin-top: auto;
+}
+.footer__title { font-size: 2rem; margin-bottom: 1rem; }
+.footer__social {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.footer__icon {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text);
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.footer__icon span {
+  max-width: 0;
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+.footer__icon:hover span {
+  max-width: 120px;
+  opacity: 1;
+  margin-left: 0.5rem;
+}
+
+/* ============================================================
+   THEME TOGGLE (floating sun/moon)
+   ============================================================ */
+.theme-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: var(--text);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  transition: all 0.5s cubic-bezier(0.25,0.8,0.25,1);
+  z-index: 9999;
+  overflow: hidden;
+  border: 3px solid transparent;
+}
+.theme-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(245,130,23,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.theme-toggle:hover::before { opacity: 1; }
+.theme-toggle i { position: absolute; transition: all 0.5s cubic-bezier(0.68,-0.55,0.265,1.55); }
+.theme-toggle .bx-moon { opacity: 1; transform: translateY(0) rotate(0deg); color: #ffd43b; }
+.theme-toggle .bx-sun  { opacity: 0; transform: translateY(20px) rotate(180deg); color: #ff6b35; }
+.theme-toggle.active .bx-moon { opacity: 0; transform: translateY(-20px) rotate(-180deg); }
+.theme-toggle.active .bx-sun  { opacity: 1; transform: translateY(0) rotate(0deg); }
+.theme-toggle:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(245,130,23,0.3); }
+.dark .theme-toggle { background: #111; }
+
+/* ============================================================
+   SCROLL ANIMATIONS (used in your JS)
+   ============================================================ */
+.section-animate, .card-stagger {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+.section-animate.visible,
+.card-stagger.visible { opacity: 1; transform: translateY(0); }
+.card-stagger:nth-child(1) { transition-delay: 0.1s; }
+.card-stagger:nth-child(2) { transition-delay: 0.2s; }
+.card-stagger:nth-child(3) { transition-delay: 0.3s; }
+
+/* ============================================================
+   RESPONSIVE FIXES
+   ============================================================ */
+@media (max-width: 768px) {
+  .news-img-wrapper { height: 220px; }
+  .news-content-full { padding: 2rem; }
+  .news-content-full h2 { font-size: 1.9rem; }
+}
+
+/* 3. FOOTER LOGO – IDENTICAL size everywhere */
+.footer-logo-img,
+.footer__logo img,
+#footer-logo,
+footer img {
+  height: 160px !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 2rem auto 1.5rem auto !important;
+  display: block;
+}
+@media (max-width: 768px) {
+  .footer-logo-img,
+  .footer__logo img,
+  #footer-logo,
+  footer img {
+    height: 130px !important;
+  }
+}
+
+/* Header logo – IDENTICAL size everywhere */
+.nav__logo img,
+.header .logo-img,
+#nav-logo,
+nav img.logo-img {
+  height: 110px !important;
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block;
+}
+@media (max-width: 768px) {
+  .nav__logo img,
+  .header .logo-img,
+  #nav-logo,
+  nav img.logo-img {
+    height: 80px !important;
+  }
+}
