@@ -382,15 +382,15 @@ header,
 .stat-item h3 { font-size:3rem; font-weight:800; color:var(--primary); margin-bottom:.5rem; }
 .stat-item p { font-size:1rem; opacity:.9; }
 
-/*====================================================================
-  CLIENTS
-====================================================================*/
-.clients { padding:5rem 0; background:#fff; text-align:center; }
-.clients h2 { margin-bottom:3rem; color:#111; }
-.client-grid { display:flex; justify-content:center; align-items:center;
-  gap:3rem; flex-wrap:wrap; opacity:.6; transition:.3s; }
-.client-logo img { height:40px; filter:grayscale(100%); transition:.3s; }
-.client-logo:hover img { filter:grayscale(0%); opacity:1; transform:scale(1.1); }
+  /*====================================================================
+    CLIENTS
+  ====================================================================*/
+  .clients { padding:5rem 0; background:#fff; text-align:center; }
+  .clients h2 { margin-bottom:3rem; color:#111; }
+  .client-grid { display:flex; justify-content:center; align-items:center;
+    gap:3rem; flex-wrap:wrap; opacity:.6; transition:.3s; }
+  .client-logo img { height:40px; filter:grayscale(100%); transition:.3s; }
+  .client-logo:hover img { filter:grayscale(0%); opacity:1; transform:scale(1.1); }
 
 /* Dark Mode */
 .dark .clients { background:#0a0a0a; }
@@ -904,19 +904,24 @@ header,
   100% { transform: scale(1); }
 }
 
-/* 9. TESTIMONIALS – SLIDE FROM SIDES */
+/* TESTIMONIALS – SMOOTH APPEAR WITHOUT HORIZONTAL OVERFLOW */
 .testimonial-card {
   opacity: 0;
-  transform: translateX(-60px);
-  transition: all 0.9s ease;
+  transform: translateY(40px);   /* Only vertical movement = safe */
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-.testimonial-card.visible:nth-child(even) {
-  transform: translateX(60px);
-}
+
+/* Staggered fade-in + slight pop (beautiful but safe) */
 .testimonial-card.visible {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
+
+/* Optional: tiny delay for staggered effect (looks premium) */
+.testimonial-card.visible:nth-child(1) { transition-delay: 0.1s; }
+.testimonial-card.visible:nth-child(2) { transition-delay: 0.2s; }
+.testimonial-card.visible:nth-child(3) { transition-delay: 0.3s; }
+.testimonial-card.visible:nth-child(4)     { transition-delay: 0.4s; }
 
 /* 10. CTA BUTTON – BREATHE + SHIMMER */
 .cta .btn-primary {
@@ -1394,6 +1399,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: visible;           /* kills horizontal overflow */
+  overflow-y: visible;
 }
 
 body {
